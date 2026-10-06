@@ -1,0 +1,57 @@
+services:
+  orders.api:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: orders-api
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__OrdersConnectionString=Server=sqlserver,1433;Database=OrdersDb;User Id=sa;Password=Password123!;TrustServerCertificate=True;
+      - ConnectionStrings__RedisConnection=redis:6379
+      - Redis__ConnectionString=redis:6379
+      - ConnectionStrings__ElasticConnection=http://elasticsearch:9200
+      - ElasticSearch__UserName=elastic
+      - ElasticSearch__Password=changeme
+    depends_on:
+      - sqlserver
+      - redis
+      - elasticsearch
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: orders-sqlserver
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "MSSQL_SA_PASSWORD=Password123!"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  redis:
+    image: redis:alpine
+    container_name: orders-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.5
+    container_name: orders-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
+volumes:
+  sqlserver_data:
+  redis_data:
+  es_data:
+

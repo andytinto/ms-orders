@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Orders/" />
+  <Folder Name="/src/Orders/api/">
+    <Project Path="Orders.Api/Orders.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Orders/Core/">
+    <Project Path="Orders.Application/Orders.Application.csproj" />
+    <Project Path="Orders.Domain/Orders.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Orders/Infrastructure/">
+    <Project Path="Orders.Infrastructure/Orders.Infrastructure.csproj" />
+    <Project Path="Orders.Persistance/Orders.Persistance.csproj" />
+  </Folder>
+  <Folder Name="/test/" />
+  <Folder Name="/test/Orders/">
+    <Project Path="Orders.Test/Orders.Test.csproj" />
+  </Folder>
+</Solution>

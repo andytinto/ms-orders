@@ -1,0 +1,53 @@
+Logging:
+  LogLevel:
+    Default: Information
+    Microsoft.AspNetCore: Warning
+
+Basic:
+  ServiceName: MS-Orders
+  Environment: "PROD"
+  BaseUrl: "https://orders.grcboard.com/"
+
+BaseUrl:
+  CPDExample: "https://orders.grcboard.com/"
+
+ElasticSearch:
+  UserName: elastic
+  Password: "Passw0rd#"
+
+ConnectionStrings:
+  OrdersConnectionString: "Server=sql2.grcboard.com;Database=GRCManageContent;User Id=sa;Password=Passw0rd#;Max Pool Size=1000000;MultipleActiveResultSets=True;TrustServerCertificate=true"
+  RedisConnection: "redis.grcboard.com:6379"
+  ElasticConnection: "https://es.grcboard.com"
+
+HeaderFilter:
+  IsFilter: "true"
+
+Redis:
+  App: "MS-Orders"
+  Environment: "PROD"
+  InstanceName: "MS-Orders:"
+  MstConfigTtl: 1209600
+
+JwtAccess:
+  AuthProviderKey: "access_auth"
+  Key: "GRCboard_Access_5v46e8pfW41EHoANvvmI"
+  Audience: "accessAudience"
+  Issuer: "accessIssuer"
+
+Masking:
+  FieldsToMask:
+    - employeeId
+    - password
+
+ElasticApm:
+  ServerUrls: "https://apm.grcboard.com"
+  SecretToken: "AAEAAWVsYXN0aWMva2liYW5hL2tpYmFuYS1zZXJ2aWNlOmo1UGxNOERKVFhPOUItdzRFdmZUaGc"
+  ServiceName: "ms-orders"
+  Environment: "prod"
+
+ExcludeLog:
+  Path:
+    - "/swagger"
+    - "/favicon"
+    - "/health"
